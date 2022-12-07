@@ -15,22 +15,13 @@ const tourSchema = new mongoose.Schema(
       // validate: [validator.isAlpha, 'Tour name must only contain caracters']
     },
     slug: String,
-    duration: {
-      type: Number,
-      required: [true, 'A tour must have a duration']
-    },
-    maxGroupSize: {
-      type: Number,
-      required: [true, 'A tour must have a group size']
-    },
-    difficulty: {
-      type: String,
-      required: [true, 'A tour must have a difficulty'],
-      enum: {
-        values: ['easy', 'medium', 'difficult'],
-        message: 'Difficulty is either: easy, medium, difficulty'
-      }
-    },
+    people: Number,
+    fullBad: Number,
+    twinBed: Number,
+    // duration: {
+    //   type: Number,
+    //   required: [true, 'A tour must have a duration']
+    // },
     ratingsAverage: {
       type: Number,
       default: 4.5,
@@ -59,7 +50,7 @@ const tourSchema = new mongoose.Schema(
     summary: {
       type: String,
       trim: true,
-      required: [true, 'A tour must have a description']
+      required: [true, 'A hostel must have a description']
     },
     description: {
       type: String,
@@ -75,35 +66,7 @@ const tourSchema = new mongoose.Schema(
       default: Date.now(),
       select: false
     },
-    startDates: [Date],
-    secretTour: {
-      type: Boolean,
-      default: false
-    },
-    startLocation: {
-      // GeoJSON
-      type: {
-        type: String,
-        default: 'Point',
-        enum: ['Point']
-      },
-      coordinates: [Number],
-      address: String,
-      description: String
-    },
-    locations: [
-      {
-        type: {
-          type: String,
-          default: 'Point',
-          enum: ['Point']
-        },
-        coordinates: [Number],
-        address: String,
-        description: String,
-        day: Number
-      }
-    ],
+    locations: [String],
     guides: [
       {
         type: mongoose.Schema.ObjectId,
@@ -119,7 +82,7 @@ const tourSchema = new mongoose.Schema(
 
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
-tourSchema.index({ startLocation: '2dsphere' });
+// tourSchema.index({ startLocation: '2dsphere' });
 
 tourSchema.virtual('durationWeeks').get(function() {
   return this.duration / 7;
