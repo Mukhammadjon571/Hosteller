@@ -103,6 +103,35 @@
         }
       }
     },
+    "/api/v1/tours":{
+      "post": {
+        "tags": ["Tour"],
+        "summary": "Create a new tour in system",
+        "requestBody": {
+          "description": "SignUp Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/SignUp"
+              }
+            }
+          }
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tour"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
     "/users/{id}": {
       "parameters": [
         {
@@ -260,6 +289,50 @@
         },
         "password": {
           "type": "string"
+        }
+      }
+    },
+    "Tour": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "people": {
+          "type": "number"
+        },
+        "fullBed": {
+          "type": "number"
+        },
+        "twinBed": {
+          "type": "number"
+        },
+        "price": {
+          "type": "number"
+        },
+        "priceDiscount": {
+          "type": "number"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageCover": {
+          "type": "string"
+        },
+        "images": {
+          "type": "array"
+        },
+        "locations": {
+          "type": "array"
+        },
+        "guides": {
+          "type": "array"
         }
       }
     }
