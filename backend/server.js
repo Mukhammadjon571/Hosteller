@@ -18,8 +18,8 @@ mongoose
   .connect(DB, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    // useCreateIndex: true,
-    // useFindAndModify: false
+    useCreateIndex: true,
+    useFindAndModify: false
   })
   .then(() => console.log('DB connection successful!'))
   .catch(err => console.log(chalk.redBright(err)));
